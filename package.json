@@ -1,7 +1,7 @@
 {
   "name": "threejs_study",
   "version": "0.1.0",
-  "author": "gqiang",
+  "author": "ZGqiang",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
