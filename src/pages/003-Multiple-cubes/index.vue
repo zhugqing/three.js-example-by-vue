@@ -42,6 +42,7 @@ export default {
         return cube
       }
 
+      // 多个正方体
       const cubes = [
         makeInstance(geometry, 'pink', -2),
         makeInstance(geometry, 'skyblue', 0),
