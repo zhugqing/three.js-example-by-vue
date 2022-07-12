@@ -20,7 +20,7 @@ export default {
       const canvas = document.getElementById('square');
       const renderer = new THREE.WebGLRenderer({canvas});
 
-      // 相机
+      // 相机 camera
       const fov = 75;
       const aspect = 1;
       const near = 0.1;
