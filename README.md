@@ -1,4 +1,7 @@
 # threejs_study
+```
+此项目为three.js案例
+```
 
 ## Project setup
 ```
