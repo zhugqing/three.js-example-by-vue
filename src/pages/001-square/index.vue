@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     main() {
-
+      // 1、详细写法
       const canvas = document.querySelector('#square');
       const squareRenderer = new THREE.WebGLRenderer({canvas}); // 画布名字必须命名为为canvas，否则不起作用 (The canvas name must be named canvas, otherwise it will not work)
 
@@ -43,7 +43,7 @@ export default {
       squareRenderer.render(scene, camera);
 
 
-      // // 简便写法
+      // // 2、简便写法
       // const canvas = document.querySelector('#square');
       // const squareRenderer = new THREE.WebGLRenderer({canvas});
 
@@ -56,8 +56,7 @@ export default {
       // const square = new THREE.Mesh(geometry, material); // Mesh创建正方型
       // scene.add(square); // 场景添加几何体
 
-      // // 添加到画布渲染
-      // squareRenderer.render(scene, camera);
+      // squareRenderer.render(scene, camera); // 添加到画布渲染
 
     }
   }
