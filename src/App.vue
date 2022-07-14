@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/">正方型</router-link> |
       <router-link to="/rotating_cube">旋转正方体</router-link> |
+      <router-link to="/rotating_light_cube">正方体添加光照</router-link> |
       <router-link to="/multiple_ubes">多个旋转正方体</router-link> |
       <router-link to="/responsive_design">响应式设计</router-link> |
       <router-link to="/scene_graph_one">场景图01</router-link> |

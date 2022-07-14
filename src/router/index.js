@@ -3,13 +3,14 @@ import VueRouter from 'vue-router'
 
 const HomeView = () => import('../pages/001-square')
 const RotatingCube = () => import('../pages/002-Rotating-cube')
-const MultipleCubes= () => import('../pages/003-Multiple-cubes')
-const ResponsiveDesign= () => import('../pages/004-responsive-design')
-const SceneGraphOne = () => import('../pages/005-scene-graph-01');
-const SceneGraphTwo = () => import('../pages/006-scene-graph-02');
-const SceneGraphThree = () => import('../pages/007-scene-graph-03');
-const SceneGraphFour = () => import('../pages/008-scene-graph-04');
-const SceneGraphFive = () => import('../pages/009-scene-graph-05');
+const RotatingLightCube = () => import('../pages/003-Rotating-light-cube')
+const MultipleCubes= () => import('../pages/004-Multiple-cubes')
+const ResponsiveDesign= () => import('../pages/005-responsive-design')
+const SceneGraphOne = () => import('../pages/006-scene-graph-01');
+const SceneGraphTwo = () => import('../pages/007-scene-graph-02');
+const SceneGraphThree = () => import('../pages/008-scene-graph-03');
+const SceneGraphFour = () => import('../pages/009-scene-graph-04');
+const SceneGraphFive = () => import('../pages/010-scene-graph-05');
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/rotating_cube',
     name: 'rotating_cube',
     component: RotatingCube
+  },
+  {
+    path: '/rotating_light_cube',
+    name: 'rotating_light_cube',
+    component: RotatingLightCube
   },
   {
     path: '/multiple_ubes',
