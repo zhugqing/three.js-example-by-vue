@@ -43,6 +43,7 @@ export default {
       const boxDepth = 1;
       const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
       const material = new THREE.MeshBasicMaterial({color: 0x44aa88});
+      // // const material = new THREE.MeshBasicMaterial({color: 'skyblue'});
       const square = new THREE.Mesh(geometry, material);
       scene.add(square);
 
