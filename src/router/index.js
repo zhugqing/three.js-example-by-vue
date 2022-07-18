@@ -11,6 +11,8 @@ const SceneGraphTwo = () => import('../pages/007-scene-graph-02');
 const SceneGraphThree = () => import('../pages/008-scene-graph-03');
 const SceneGraphFour = () => import('../pages/009-scene-graph-04');
 const SceneGraphFive = () => import('../pages/010-scene-graph-05');
+const materialsOne = () => import('../pages/011-materials-01');
+const materialsTwo = () => import('../pages/011-materials-02');
 
 Vue.use(VueRouter)
 
@@ -64,6 +66,16 @@ const routes = [
     path: '/scene_graph_five',
     name: 'scene_graph_five',
     component: SceneGraphFive
+  },
+  {
+    path: '/materials_one',
+    name: 'materials_one',
+    component: materialsOne
+  },
+  {
+    path: '/materials_two',
+    name: 'materials_two',
+    component: materialsTwo
   },
 ]
 

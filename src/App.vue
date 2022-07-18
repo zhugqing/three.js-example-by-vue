@@ -11,6 +11,8 @@
       <router-link to="/scene_graph_three">场景图03</router-link> |
       <router-link to="/scene_graph_four">场景图04</router-link> |
       <router-link to="/scene_graph_five">场景图05</router-link> |
+      <router-link to="/materials_one">材质01</router-link> |
+      <router-link to="/materials_two">材质02</router-link> |
     </nav>
     <router-view/>
   </div>
