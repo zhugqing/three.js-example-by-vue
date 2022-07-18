@@ -68,6 +68,9 @@ export default {
       makeInstance('basic', 'rgb(64,127,191)', 0, -1, 0),
       makeInstance('Lambert', 'rgb(64,127,191)', 50, 0, 0),
       makeInstance('Phong', 'rgb(64,127,191)', 150, 1, 0),
+      makeInstance('basic', 'rgb(64,127,191)', 0, -1, -1),
+      makeInstance('Lambert', 'rgb(64,127,191)', 50, 0, -1),
+      makeInstance('Phong', 'rgb(64,127,191)', 150, 1, -1),
       // 多个正方体
       // const cubes = [
       //   makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1),
