@@ -12,7 +12,7 @@ const SceneGraphThree = () => import('../pages/008-scene-graph-03');
 const SceneGraphFour = () => import('../pages/009-scene-graph-04');
 const SceneGraphFive = () => import('../pages/010-scene-graph-05');
 const materialsOne = () => import('../pages/011-materials-01');
-const materialsTwo = () => import('../pages/011-materials-02');
+const materialsTwo = () => import('../pages/012-materials-02');
 
 Vue.use(VueRouter)
 
