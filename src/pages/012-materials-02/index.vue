@@ -22,7 +22,7 @@ export default {
 
       const scene = new THREE.Scene();
       // const geometry = new THREE.BoxGeometry(1, 1, 1);
-      // const geometry = new THREE.CircleGeometry(0.2, 45, 2, 10 );
+      // const geometry = new THREE.CircleGeometry(0.2, 45, 2, 10 ); // 平面圆看不出来光照
       const radius = 0.2;
       const widthSegments = 32;
       const heightSegments = 32;
