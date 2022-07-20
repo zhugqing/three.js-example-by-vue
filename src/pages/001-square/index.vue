@@ -30,6 +30,7 @@ export default {
 
       // 创建和设置场景
       const scene = new THREE.Scene();
+      // scene.background = new THREE.Color( '#444' ); // 改变场景颜色
       const boxWidth = 1;
       const boxHeight = 1;
       const boxDepth = 1;

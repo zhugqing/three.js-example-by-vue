@@ -15,6 +15,7 @@
       <router-link to="/materials_two">材质02</router-link> |
       <router-link to="/materials_three">材质03</router-link> |
       <router-link to="/materials_four">材质04-平面着色</router-link> |
+      <router-link to="/materials_five">材质05-显示正反面</router-link> |
     </nav>
     <router-view/>
   </div>

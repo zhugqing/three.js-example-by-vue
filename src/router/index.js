@@ -15,6 +15,7 @@ const materialsOne = () => import('../pages/011-materials-01');
 const materialsTwo = () => import('../pages/012-materials-02');
 const materialsThree = () => import('../pages/013-materials-03');
 const materialsFour = () => import('../pages/014-materials-04');
+const materialsFive = () => import('../pages/015-materials-05');
 
 Vue.use(VueRouter)
 
@@ -88,6 +89,11 @@ const routes = [
     path: '/materials_four',
     name: 'materials_four',
     component: materialsFour
+  },
+  {
+    path: '/materials_five',
+    name: 'materials_five',
+    component: materialsFive
   },
 ]
 
