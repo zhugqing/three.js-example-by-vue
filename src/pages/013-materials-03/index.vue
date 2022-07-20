@@ -100,10 +100,6 @@ export default {
       makeInstance('Toon', 'rgb(64,127,191)', 30, 0, 0.7);
       makeInstance('Toon', 'rgb(64,127,191)', 0, 1, 0.7);
 
-      // makeInstance('basic', 'purple', 0, -1, -0.4);
-      // makeInstance('Lambert', 'purple', 30, 0, -0.4);
-      // makeInstance('Phong', 'purple', 150, 1, -0.4);
-
       // MeshStandardMaterial材料
       makeInstance('Standard', 'green', 0, -1.2, 0.2, {
         roughness: 0,
@@ -228,58 +224,8 @@ export default {
         clearcoat: 1,
         clearCoatRoughness: 1,
       });
-      
-      // // 多个正方体,旋转
-      // const cubes = [
-      //   makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1),
-      //   makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1),
-      //   makeInstance('Phong', 'rgb(255,4,4)', 150, 1, 1),
-      //   makeInstance('basic', 'rgb(64,127,191)', 0, -1, 0.3),
-      //   makeInstance('Lambert', 'rgb(64,127,191)', 30, 0, 0.3),
-      //   makeInstance('Phong', 'rgb(64,127,191)', 150, 1, 0.3),
-      //   makeInstance('basic', 'purple', 0, -1, -0.4),
-      //   makeInstance('Lambert', 'purple', 30, 0, -0.4),
-      //   makeInstance('Phong', 'purple', 150, 1, -0.4),
-      //   makeInstance('basic', 'green', 0, -1, -1.1),
-      //   makeInstance('Lambert', 'green', 30, 0, -1.1),
-      //   makeInstance('Phong', 'green', 150, 1, -1.1),
-      // ]
-
-      // const material = new THREE.MeshBasicMaterial({
-      //   color: 'rgb(255,4,4)',
-      //   shininess: 0, 
-      //   flatShading: true,
-      // });
-      // const material = new THREE.MeshLambertMaterial({
-      //   color: 'rgb(255,4,4)',
-      //   shininess: 50, 
-      //   flatShading: true,
-      // });
-      // const material = new THREE.MeshPhongMaterial({
-      //   color: 'rgb(255,4,4)',
-      //   shininess: 150, 
-      //   flatShading: true,
-      // });
-
-
-      // const square = new THREE.Mesh(geometry, material);
-      // scene.add(square);
 
       renderer.render(scene, camera);
-
-      // // 让立方体旋转
-      // function render(time) {
-      //   time *= 0.001;
-      //   cubes.forEach((item, index) => {
-      //     const speed = 1+index*.1;
-      //     const rot = time*speed;
-      //     item.rotation.x = rot;
-      //     item.rotation.y = rot;
-      //   })
-      //   renderer.render(scene, camera);
-      //   requestAnimationFrame(render);
-      // }
-      // requestAnimationFrame(render);
     }
   },
 }
