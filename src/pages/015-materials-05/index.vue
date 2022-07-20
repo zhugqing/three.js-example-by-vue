@@ -35,8 +35,8 @@ export default {
       // 平面缓冲几何体
       const w = 0.5;
       const h = 0.5;
-      const widthSegments = 1;
-      const heightSegments = 1;
+      const widthSegments = 15;
+      const heightSegments = 13;
       const geometry = new THREE.PlaneGeometry( w, h, widthSegments, heightSegments );
 
       // 各种标准材质的构建速度从最快到最慢：MeshBasicMaterial ➡ MeshLambertMaterial ➡ MeshPhongMaterial ➡ MeshStandardMaterial ➡ MeshPhysicalMaterial。
@@ -47,6 +47,7 @@ export default {
           case 'basic':
             material = new THREE.MeshBasicMaterial({
               color: color,
+              // side:THREE.DoubleSide
               // shininess: shininess,
             }); // MeshPhongMaterial材质不受光照影响
             break;
@@ -54,20 +55,13 @@ export default {
             material = new THREE.MeshPhysicalMaterial({
               color: color,
               roughness: anotherParams.roughness, // 参数从0到1，粗糙度（roughness）高的东西，比如棒球，就不会有很强烈的反光，而不粗糙的东西，比如台球，就很有光泽。
-              // metalness: anotherParams.metalness, // 金属度，参数从0到1，0代表非金属，1代表金属
-              // clearcoat: anotherParams.clearcoat, // 该参数从0到1，决定了要涂抹的清漆光亮层的程度，
-              // // clearCoatRoughness: anotherParams.clearCoatRoughness, // 该参数从0到1，指定光泽层的粗糙程度。
-              // flatShading: anotherParams.flatShading, // 金属度，参数从0到1，0代表非金属，1代表金属
-              side:THREE.FrontSide
-              // side:THREE.DoubleSide
+              metalness: anotherParams.metalness, // 金属度，参数从0到1，0代表非金属，1代表金属
+              clearcoat: anotherParams.clearcoat, // 该参数从0到1，决定了要涂抹的清漆光亮层的程度，
+              // clearCoatRoughness: anotherParams.clearCoatRoughness, // 该参数从0到1，指定光泽层的粗糙程度。
+              flatShading: anotherParams.flatShading, // 金属度，参数从0到1，0代表非金属，1代表金属
+              // side:THREE.FrontSide
+              side:THREE.DoubleSide
             }); // MeshPhysicalMaterial材质受光照影响
-            break;
-          case 'Shader':
-            material = new THREE.ShaderMaterial({
-              // color: color,
-              // roughness: anotherParams.roughness, // 参数从0到1，粗糙度（roughness）高的东西，比如棒球，就不会有很强烈的反光，而不粗糙的东西，比如台球，就很有光泽。
-              // flatShading: anotherParams.flatShading, // 金属度，参数从0到1，0代表非金属，1代表金属
-            }); // ShaderMaterial材质受光照影响
             break;
         
           default:
@@ -80,21 +74,21 @@ export default {
         // 添加光照
         const intensity = 1; // 光照强度
         const light = new THREE.DirectionalLight(0xFFFFFF, intensity);
-        light.position.set(0, 0, 5); //设置定光位置在相机左上方(-1, 2, 4), 默认目标点为原点(0, 0, 0)
+        light.position.set(-1, 2, 5); //设置定光位置在相机左上方(-1, 2, 4), 默认目标点为原点(0, 0, 0)
         scene.add(light);
         return square
       }
 
       const cubes = [
-        makeInstance('basic', '#049EF4', 30, -0.6, 0.5, {
+        makeInstance('Physical', '#09679b', 30, -0.6, 0.5, {
           roughness: 1,
           metalness: 0.4,
           clearcoat: 0.4,
           clearCoatRoughness: 0.4,
           flatShading: false,
         }),
-        makeInstance('basic', '#049EF4', 30, 0.8, 0.5, {
-          roughness: 1,
+        makeInstance('Physical', '#09679b', 30, 0.8, 0.5, {
+          roughness: 0.4,
           metalness: 0.4,
           clearcoat: 0.4,
           clearCoatRoughness: 0.4,
@@ -117,7 +111,7 @@ export default {
 
         cubes.forEach((item, index) => {
           let speed = 1 + index*.1;
-          item.rotation.x = time*speed;
+          // item.rotation.x = time*speed;
           item.rotation.y = time*speed;
         })
         renderer.render(scene, camera);
