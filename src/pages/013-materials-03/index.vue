@@ -8,7 +8,7 @@
 import * as THREE from 'three';
 
 export default {
-  name: 'MaterialsThree',
+  name: 'MaterialsTwo',
   mounted() {
     this.main();
   },
@@ -21,8 +21,6 @@ export default {
       camera.position.z = 2;
 
       const scene = new THREE.Scene();
-      // const geometry = new THREE.BoxGeometry(1, 1, 1);
-      // const geometry = new THREE.CircleGeometry(0.2, 45, 2, 10 );
       const radius = 0.2;
       const widthSegments = 32;
       const heightSegments = 32;
@@ -32,7 +30,9 @@ export default {
       const thetaLength = 6;
       const geometry = new THREE.SphereGeometry( radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength );
 
-      function makeInstance(type, color, shininess, xposition, yposition) {
+      // 各种标准材质的构建速度从最快到最慢：MeshBasicMaterial ➡ MeshLambertMaterial ➡ MeshPhongMaterial ➡ MeshStandardMaterial ➡ MeshPhysicalMaterial。
+      // 此外还有MeshDepthMaterial、MeshNormalMaterial、ShaderMaterial、RawShaderMaterial等特殊材质，此处未提供案例
+      function makeInstance(type, color, shininess, xposition, yposition, anotherParams) {
         let material = null
         switch (type) {
           case 'basic':
@@ -45,13 +45,35 @@ export default {
             material = new THREE.MeshLambertMaterial({
               color: color,
               // shininess: shininess,
-            }); // MeshPhongMaterial材质受光照影响
+            }); // MeshLambertMaterial材质受光照影响
             break;
           case 'Phong':
             material = new THREE.MeshPhongMaterial({
               color: color,
               shininess: shininess,
             }); // MeshPhongMaterial材质受光照影响
+            break;
+          case 'Toon':
+            material = new THREE.MeshToonMaterial({
+              color: color,
+              // shininess: shininess,
+            }); // MeshToonMaterial材质受光照影响
+            break;
+          case 'Standard':
+            material = new THREE.MeshStandardMaterial({
+              color: color,
+              roughness: anotherParams.roughness, // 参数从0到1，粗糙度（roughness）高的东西，比如棒球，就不会有很强烈的反光，而不粗糙的东西，比如台球，就很有光泽。
+              metalness: anotherParams.metalness, // 金属度，参数从0到1，0代表非金属，1代表金属
+            }); // MeshStandardMaterial材质受光照影响
+            break;
+          case 'Physical':
+            material = new THREE.MeshPhysicalMaterial({
+              color: color,
+              roughness: anotherParams.roughness, // 参数从0到1，粗糙度（roughness）高的东西，比如棒球，就不会有很强烈的反光，而不粗糙的东西，比如台球，就很有光泽。
+              metalness: anotherParams.metalness, // 金属度，参数从0到1，0代表非金属，1代表金属
+              clearcoat: anotherParams.clearcoat, // 该参数从0到1，决定了要涂抹的清漆光亮层的程度，
+              // clearCoatRoughness: anotherParams.clearCoatRoughness, // 该参数从0到1，指定光泽层的粗糙程度。
+            }); // MeshPhysicalMaterial材质受光照影响
             break;
         
           default:
@@ -69,34 +91,159 @@ export default {
         return square
       }
 
-      // // 多个正方体
-      // makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1);
-      // makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1);
-      // makeInstance('Phong', 'rgb(255,4,4)', 150, 1, 1);
-      // makeInstance('basic', 'rgb(64,127,191)', 0, -1, 0.3);
-      // makeInstance('Lambert', 'rgb(64,127,191)', 30, 0, 0.3);
-      // makeInstance('Phong', 'rgb(64,127,191)', 150, 1, 0.3);
+      // 多个正方体
+      makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1.2);
+      makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1.2);
+      makeInstance('Phong', 'rgb(255,4,4)', 150, 1, 1.2);
+
+      makeInstance('Toon', 'rgb(64,127,191)', 150, -1, 0.7);
+      makeInstance('Toon', 'rgb(64,127,191)', 30, 0, 0.7);
+      makeInstance('Toon', 'rgb(64,127,191)', 0, 1, 0.7);
+
       // makeInstance('basic', 'purple', 0, -1, -0.4);
       // makeInstance('Lambert', 'purple', 30, 0, -0.4);
       // makeInstance('Phong', 'purple', 150, 1, -0.4);
-      // makeInstance('basic', 'green', 0, -1, -1.1);
-      // makeInstance('Lambert', 'green', 30, 0, -1.1);
-      // makeInstance('Phong', 'green', 150, 1, -1.1);
-      // 多个正方体,旋转
-      const cubes = [
-        makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1),
-        makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1),
-        makeInstance('Phong', 'rgb(255,4,4)', 150, 1, 1),
-        makeInstance('basic', 'rgb(64,127,191)', 0, -1, 0.3),
-        makeInstance('Lambert', 'rgb(64,127,191)', 30, 0, 0.3),
-        makeInstance('Phong', 'rgb(64,127,191)', 150, 1, 0.3),
-        makeInstance('basic', 'purple', 0, -1, -0.4),
-        makeInstance('Lambert', 'purple', 30, 0, -0.4),
-        makeInstance('Phong', 'purple', 150, 1, -0.4),
-        makeInstance('basic', 'green', 0, -1, -1.1),
-        makeInstance('Lambert', 'green', 30, 0, -1.1),
-        makeInstance('Phong', 'green', 150, 1, -1.1),
-      ]
+
+      // MeshStandardMaterial材料
+      makeInstance('Standard', 'green', 0, -1.2, 0.2, {
+        roughness: 0,
+        metalness: 0,
+      });
+      makeInstance('Standard', 'green', 0, -0.75, 0.2, {
+        roughness: 0.2,
+        metalness: 0.2,
+      });
+      makeInstance('Standard', 'green', 30, -0.3, 0.2, {
+        roughness: 0.4,
+        metalness: 0.4,
+      });
+      makeInstance('Standard', 'green', 30, 0.2, 0.2, {
+        roughness: 0.6,
+        metalness: 0.6,
+      });
+      makeInstance('Standard', 'green', 150, 0.65, 0.2, {
+        roughness: 0.8,
+        metalness: 0.8,
+      });
+      makeInstance('Standard', 'green', 150, 1.15, 0.2, {
+        roughness: 1,
+        metalness: 1,
+      });
+      
+      makeInstance('Standard', 'green', 0, -1.2, -0.3, {
+        roughness: 0,
+        metalness: 0,
+      });
+      makeInstance('Standard', 'green', 0, -0.75, -0.3, {
+        roughness: 0.2,
+        metalness: 0.2,
+      });
+      makeInstance('Standard', 'green', 30, -0.3, -0.3, {
+        roughness: 0.4,
+        metalness: 0.4,
+      });
+      makeInstance('Standard', 'green', 30, 0.2, -0.3, {
+        roughness: 0.6,
+        metalness: 0.6,
+      });
+      makeInstance('Standard', 'green', 150, 0.65, -0.3, {
+        roughness: 0.8,
+        metalness: 0.8,
+      });
+      makeInstance('Standard', 'green', 150, 1.15, -0.3, {
+        roughness: 1,
+        metalness: 1,
+      });
+      // MeshPhysicalMaterial材料
+      makeInstance('Physical', 'green', 0, -1.2, -0.8, {
+        roughness: 0,
+        metalness: 0,
+        clearcoat: 0,
+        clearCoatRoughness: 0,
+      });
+      makeInstance('Physical', 'green', 0, -0.75, -0.8, {
+        roughness: 0.2,
+        metalness: 0.2,
+        clearcoat: 0.2,
+        clearCoatRoughness: 0.2,
+      });
+      makeInstance('Physical', 'green', 30, -0.3, -0.8, {
+        roughness: 0.4,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+      });
+      makeInstance('Physical', 'green', 30, 0.2, -0.8, {
+        roughness: 0.6,
+        metalness: 0.6,
+        clearcoat: 0.6,
+        clearCoatRoughness: 0.6,
+      });
+      makeInstance('Physical', 'green', 150, 0.65, -0.8, {
+        roughness: 0.8,
+        metalness: 0.8,
+        clearcoat: 0.8,
+        clearCoatRoughness: 0.8,
+      });
+      makeInstance('Physical', 'green', 150, 1.15, -0.8, {
+        roughness: 1,
+        metalness: 1,
+        clearcoat: 1,
+        clearCoatRoughness: 1,
+      });
+      
+      makeInstance('Physical', 'green', 0, -1.2, -1.3, {
+        roughness: 0,
+        metalness: 0,
+        clearcoat: 0,
+        clearCoatRoughness: 0,
+      });
+      makeInstance('Physical', 'green', 0, -0.75, -1.3, {
+        roughness: 0.2,
+        metalness: 0.2,
+        clearcoat: 0.2,
+        clearCoatRoughness: 0.2,
+      });
+      makeInstance('Physical', 'green', 30, -0.3, -1.3, {
+        roughness: 0.4,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+      });
+      makeInstance('Physical', 'green', 30, 0.2, -1.3, {
+        roughness: 0.6,
+        metalness: 0.6,
+        clearcoat: 0.6,
+        clearCoatRoughness: 0.6,
+      });
+      makeInstance('Physical', 'green', 150, 0.65, -1.3, {
+        roughness: 0.8,
+        metalness: 0.8,
+        clearcoat: 0.8,
+        clearCoatRoughness: 0.8,
+      });
+      makeInstance('Physical', 'green', 150, 1.15, -1.3, {
+        roughness: 1,
+        metalness: 1,
+        clearcoat: 1,
+        clearCoatRoughness: 1,
+      });
+      
+      // // 多个正方体,旋转
+      // const cubes = [
+      //   makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1),
+      //   makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1),
+      //   makeInstance('Phong', 'rgb(255,4,4)', 150, 1, 1),
+      //   makeInstance('basic', 'rgb(64,127,191)', 0, -1, 0.3),
+      //   makeInstance('Lambert', 'rgb(64,127,191)', 30, 0, 0.3),
+      //   makeInstance('Phong', 'rgb(64,127,191)', 150, 1, 0.3),
+      //   makeInstance('basic', 'purple', 0, -1, -0.4),
+      //   makeInstance('Lambert', 'purple', 30, 0, -0.4),
+      //   makeInstance('Phong', 'purple', 150, 1, -0.4),
+      //   makeInstance('basic', 'green', 0, -1, -1.1),
+      //   makeInstance('Lambert', 'green', 30, 0, -1.1),
+      //   makeInstance('Phong', 'green', 150, 1, -1.1),
+      // ]
 
       // const material = new THREE.MeshBasicMaterial({
       //   color: 'rgb(255,4,4)',
@@ -120,19 +267,19 @@ export default {
 
       renderer.render(scene, camera);
 
-      // 让立方体旋转
-      function render(time) {
-        time *= 0.001;
-        cubes.forEach((item, index) => {
-          const speed = 1+index*.1;
-          const rot = time*speed;
-          item.rotation.x = rot;
-          item.rotation.y = rot;
-        })
-        renderer.render(scene, camera);
-        requestAnimationFrame(render);
-      }
-      requestAnimationFrame(render);
+      // // 让立方体旋转
+      // function render(time) {
+      //   time *= 0.001;
+      //   cubes.forEach((item, index) => {
+      //     const speed = 1+index*.1;
+      //     const rot = time*speed;
+      //     item.rotation.x = rot;
+      //     item.rotation.y = rot;
+      //   })
+      //   renderer.render(scene, camera);
+      //   requestAnimationFrame(render);
+      // }
+      // requestAnimationFrame(render);
     }
   },
 }
