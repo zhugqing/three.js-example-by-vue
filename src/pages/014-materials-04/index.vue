@@ -21,6 +21,7 @@ export default {
       camera.position.z = 2;
 
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color( '#444' );
       const radius = 0.4;
       const widthSegments = 32;
       const heightSegments = 32;
