@@ -25,15 +25,6 @@ export default {
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color( '#444' );
-
-      // const w = 1;
-      // const h = 1;
-      // const d = 1;
-      // const geometry = new THREE.BoxGeometry(w, h ,d);
-      // const material = new THREE.MeshBasicMaterial({color: 'skyblue'}); // MeshBasicMaterial材质不受光照影响
-      // const cube = new THREE.Mesh(geometry, material);
-      // scene.add(cube);
-
       
       const fatherObj = new THREE.Object3D();
       scene.add(fatherObj)
@@ -48,6 +39,7 @@ export default {
       // 各种标准材质的构建速度从最快到最慢：MeshBasicMaterial ➡ MeshLambertMaterial ➡ MeshPhongMaterial ➡ MeshStandardMaterial ➡ MeshPhysicalMaterial。
       // 此外还有MeshDepthMaterial、MeshNormalMaterial、ShaderMaterial、RawShaderMaterial等特殊材质，此处未提供案例
       function makeInstance(anotherParams) {
+
         let material = null
         switch (anotherParams.type) {
           case 'Physical':
@@ -58,11 +50,10 @@ export default {
               clearcoat: anotherParams.clearcoat, // 该参数从0到1，决定了要涂抹的清漆光亮层的程度，
               // clearCoatRoughness: anotherParams.clearCoatRoughness, // 该参数从0到1，指定光泽层的粗糙程度。
               flatShading: anotherParams.flatShading, // 金属度，参数从0到1，0代表非金属，1代表金属
-              // side:THREE.FrontSide,
-              side:THREE.DoubleSide
+              // side:THREE.FrontSide, // 只显示正面
+              side:THREE.DoubleSide, // 显示正反面
             }); // MeshPhysicalMaterial材质受光照影响
             break;
-        
           default:
             break;
         }
@@ -79,6 +70,7 @@ export default {
         } else if (anotherParams.color == 'green' || anotherParams.color == 'yellow') {
           square.rotation.y = anotherParams.angle;
         }
+
         // // 添加平行光光照
         // const intensity = 1; // 光照强度
         // const light = new THREE.DirectionalLight(0xFFFFFF, intensity);
@@ -90,136 +82,124 @@ export default {
         const intensity2 = 0.2;
         const light2 = new THREE.AmbientLight(color2, intensity2);
         scene.add(light2);
+        
         return square
+
       }
 
       // 注意按原点来画六个面，这样在修改fatherObj.rotation.x和fatherObj.rotation.y时才会绕原点旋转
-      // const cubes = [
-        makeInstance({
-          type: 'Physical',
-          color: '#09679b',
-          shininess: 30,
-          xposition: 0,
-          yposition: -0.75,
-          zposition: 0,
-          roughness: 1,
-          metalness: 0.4,
-          clearcoat: 0.4,
-          clearCoatRoughness: 0.4,
-          flatShading: false,
-          angle: Math.PI/2
-        }),
-        makeInstance({
-          type: 'Physical',
-          color: 'pink',
-          shininess: 30,
-          xposition: 0,
-          yposition: 0.75,
-          zposition: 0,
-          roughness: 1,
-          metalness: 0.4,
-          clearcoat: 0.4,
-          clearCoatRoughness: 0.4,
-          flatShading: false,
-          angle: Math.PI/2
-        }),
-        makeInstance({
-          type: 'Physical',
-          color: 'green',
-          shininess: 30,
-          xposition: -0.75,
-          yposition: 0,
-          zposition: 0,
-          roughness: 1,
-          metalness: 0.4,
-          clearcoat: 0.4,
-          clearCoatRoughness: 0.4,
-          flatShading: false,
-          angle: Math.PI/2
-        }),
-        makeInstance({
-          type: 'Physical',
-          color: 'yellow',
-          shininess: 30,
-          xposition: 0.75,
-          yposition: 0,
-          zposition: 0,
-          roughness: 1,
-          metalness: 0.4,
-          clearcoat: 0.4,
-          clearCoatRoughness: 0.4,
-          flatShading: false,
-          angle: Math.PI/2
-        }),
-        makeInstance({
-          type: 'Physical',
-          color: 'purple',
-          shininess: 30,
-          xposition: 0,
-          yposition: 0,
-          zposition: -0.75,
-          roughness: 1,
-          metalness: 0.4,
-          clearcoat: 0.4,
-          clearCoatRoughness: 0.4,
-          flatShading: false,
-          angle: Math.PI/2
-        }),
-        makeInstance({
-          type: 'Physical',
-          color: 'skyblue',
-          shininess: 30,
-          xposition: 0,
-          yposition: 0,
-          zposition: 0.75,
-          roughness: 1,
-          metalness: 0.4,
-          clearcoat: 0.4,
-          clearCoatRoughness: 0.4,
-          flatShading: false,
-          angle: Math.PI/2
-        }),
-      // ]
+      makeInstance({
+        type: 'Physical',
+        color: '#09679b',
+        shininess: 30,
+        xposition: 0,
+        yposition: -0.75,
+        zposition: 0,
+        roughness: 1,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+        flatShading: false,
+        angle: Math.PI/2
+      }),
+      makeInstance({
+        type: 'Physical',
+        color: 'pink',
+        shininess: 30,
+        xposition: 0,
+        yposition: 0.75,
+        zposition: 0,
+        roughness: 1,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+        flatShading: false,
+        angle: Math.PI/2
+      }),
+      makeInstance({
+        type: 'Physical',
+        color: 'green',
+        shininess: 30,
+        xposition: -0.75,
+        yposition: 0,
+        zposition: 0,
+        roughness: 1,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+        flatShading: false,
+        angle: Math.PI/2
+      }),
+      makeInstance({
+        type: 'Physical',
+        color: 'yellow',
+        shininess: 30,
+        xposition: 0.75,
+        yposition: 0,
+        zposition: 0,
+        roughness: 1,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+        flatShading: false,
+        angle: Math.PI/2
+      }),
+      makeInstance({
+        type: 'Physical',
+        color: 'purple',
+        shininess: 30,
+        xposition: 0,
+        yposition: 0,
+        zposition: -0.75,
+        roughness: 1,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+        flatShading: false,
+        angle: Math.PI/2
+      }),
+      makeInstance({
+        type: 'Physical',
+        color: 'skyblue',
+        shininess: 30,
+        xposition: 0,
+        yposition: 0,
+        zposition: 0.75,
+        roughness: 1,
+        metalness: 0.4,
+        clearcoat: 0.4,
+        clearCoatRoughness: 0.4,
+        flatShading: false,
+        angle: Math.PI/2
+      }),
       // console.log(fatherObj)
       renderer.render(scene, camera);
 
-      // // 让立方体旋转
-      // function render(time) {
-      //   time *= 0.001;
-      //   fatherObj.rotation.x = time;
-      //   fatherObj.rotation.y = time;
-      //   // cube.rotation.x = time;
-      //   // cube.rotation.y = time;
-      //   renderer.render(scene, camera);
-      //   requestAnimationFrame(render);
-      // }
-      // requestAnimationFrame(render);
-
       // // 让球体旋转
       function render(time) {
+
         time *= 0.001;
 
         // 响应式的使相机宽高比等于canvas画布的宽高比,解决正方体被拉伸问题
         if (resizeRendererToDisplaySize(renderer)) {
+
           const canvas = renderer.domElement;
           camera.aspect = canvas.clientWidth / canvas.clientHeight;
           camera.updateProjectionMatrix();
+
         }
 
-        // cubes.forEach((item, index) => {
-        //   let speed = 1 + index*.1;
-        //   item.rotation.x = time*speed;
-        //   item.rotation.y = time*speed;
-        // })
         fatherObj.rotation.x = time;
         fatherObj.rotation.y = time;
         renderer.render(scene, camera);
         requestAnimationFrame(render);
+        
       }
       requestAnimationFrame(render);
 
       // 判断canvas宽高变化，动态设置绘图缓冲区(drawingbuffer)尺寸，解决canvas元素设置css样式模糊问题
       function resizeRendererToDisplaySize(renderer) {
+
         const canvas = renderer.domElement;
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
@@ -228,6 +208,7 @@ export default {
           renderer.setSize(width, height, false);
         }
         return needResize;
+
       }
     }
   },
