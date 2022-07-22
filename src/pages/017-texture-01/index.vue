@@ -24,6 +24,10 @@ export default {
       camera.position.z = 2.5;
 
       const scene = new THREE.Scene();
+      // 场景添加纹理
+      const textureLoader = new THREE.TextureLoader()
+      scene.background = textureLoader.load(require('@/assets/images/wall.jpg'))
+
       const geometry = new THREE.BoxGeometry(1, 1, 1);
       // 添加纹理
       const loader = new THREE.TextureLoader();

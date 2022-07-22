@@ -24,6 +24,9 @@ export default {
       camera.position.z = 2.5;
 
       const scene = new THREE.Scene();
+      // 场景添加纹理
+      const textureLoader = new THREE.TextureLoader()
+      scene.background = textureLoader.load(require('@/assets/images/Gqiang.png'))
       const geometry = new THREE.BoxGeometry(1, 1, 1);
       // 正方体添加多面纹理
       const loader = new THREE.TextureLoader();
