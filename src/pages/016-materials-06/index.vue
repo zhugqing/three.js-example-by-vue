@@ -17,7 +17,7 @@ export default {
       const canvas = document.getElementById('square');
       const renderer = new THREE.WebGLRenderer({canvas});
 
-      // 注意根据所画物体大小来天正相机角度fov、最近视角near、最远视角far等，防止物体在视角外导致看不到
+      // 注意根据所画物体大小来调整相机角度fov、最近视角near、最远视角far等，防止物体在视角外导致看不到
       const camera = new THREE.PerspectiveCamera(90, 1, 0.1, 50);// far参数调整到5，太小了看不全;
       camera.position.z = 5;
       // camera.position.y = 0;
