@@ -76,13 +76,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.home{
-  height: 100%;
-}
-#square{
-  width: 90%;
-  height: 100%;
-}
-</style>

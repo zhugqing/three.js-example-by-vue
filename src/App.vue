@@ -33,6 +33,15 @@
   color: #2c3e50;
 }
 
+#square{
+  width: 90%;
+  height: 100%;
+}
+
+.home{
+  height: 100%;
+}
+
 nav {
   padding: 30px;
 }

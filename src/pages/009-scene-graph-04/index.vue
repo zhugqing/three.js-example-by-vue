@@ -153,10 +153,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#square{
-  width: 90%;
-  height: 100%;
-}
-</style>
