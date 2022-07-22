@@ -39,7 +39,6 @@ export default {
       // material.color.setHSL(h, s, l)   // 其中 h, s, 和 l 从 0 到 1
       material.color.setRGB(64, 122, 191)   // 其中 r, g, 和 b 从 0 到 1
 
-
       const square = new THREE.Mesh(geometry, material);
       scene.add(square);
 

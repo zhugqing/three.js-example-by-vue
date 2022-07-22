@@ -43,7 +43,6 @@ export default {
       // Render the camera and scene onto the canvas by squareRenderer
       squareRenderer.render(scene, camera);
 
-
       // // 2、简便写法
       // const canvas = document.querySelector('#square');
       // const squareRenderer = new THREE.WebGLRenderer({canvas});

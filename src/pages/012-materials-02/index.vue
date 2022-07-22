@@ -69,7 +69,7 @@ export default {
         return square
       }
 
-      // 多个正方体
+      // 多个球
       makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1);
       makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1);
       makeInstance('Phong', 'rgb(255,4,4)', 150, 1, 1);
@@ -82,7 +82,7 @@ export default {
       makeInstance('basic', 'green', 0, -1, -1.1);
       makeInstance('Lambert', 'green', 30, 0, -1.1);
       makeInstance('Phong', 'green', 150, 1, -1.1);
-      // // 多个正方体,旋转
+      // // 多个球体,旋转
       // const cubes = [
       //   makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1),
       //   makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1),
@@ -120,7 +120,7 @@ export default {
 
       renderer.render(scene, camera);
 
-      // // 让立方体旋转
+      // // 让球旋转
       // function render(time) {
       //   time *= 0.001;
       //   cubes.forEach((item, index) => {

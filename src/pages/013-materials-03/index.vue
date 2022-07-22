@@ -91,7 +91,7 @@ export default {
         return square
       }
 
-      // 多个正方体
+      // 多个球体
       makeInstance('basic', 'rgb(255,4,4)', 0, -1, 1.2);
       makeInstance('Lambert', 'rgb(255,4,4)', 30, 0, 1.2);
       makeInstance('Phong', 'rgb(255,4,4)', 150, 1, 1.2);

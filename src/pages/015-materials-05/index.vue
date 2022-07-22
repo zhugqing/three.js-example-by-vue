@@ -79,7 +79,7 @@ export default {
         return square
       }
 
-      const cubes = [
+      const Obj = [
         makeInstance('Physical', '#09679b', 30, -0.6, 0.5, {
           roughness: 1,
           metalness: 0.4,
@@ -98,7 +98,7 @@ export default {
 
       renderer.render(scene, camera);
 
-      // // 让球体旋转
+      // // 旋转
       function render(time) {
         time *= 0.001;
 
@@ -109,7 +109,7 @@ export default {
           camera.updateProjectionMatrix();
         }
 
-        cubes.forEach((item, index) => {
+        Obj.forEach((item, index) => {
           let speed = 1 + index*.1;
           // item.rotation.x = time*speed;
           item.rotation.y = time*speed;

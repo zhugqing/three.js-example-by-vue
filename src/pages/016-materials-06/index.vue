@@ -26,6 +26,7 @@ export default {
       const scene = new THREE.Scene();
       scene.background = new THREE.Color( '#444' );
       
+      // 创建一个父级3D对象
       const fatherObj = new THREE.Object3D();
       scene.add(fatherObj)
 
@@ -175,7 +176,7 @@ export default {
       // console.log(fatherObj)
       renderer.render(scene, camera);
 
-      // // 让球体旋转
+      // 旋转
       function render(time) {
 
         time *= 0.001;
