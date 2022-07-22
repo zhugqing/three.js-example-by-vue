@@ -37,23 +37,19 @@ export default {
       const heightSegments = 33;
       const geometry = new THREE.PlaneGeometry( w, h, widthSegments, heightSegments );
 
-      // 各种标准材质的构建速度从最快到最慢：MeshBasicMaterial ➡ MeshLambertMaterial ➡ MeshPhongMaterial ➡ MeshStandardMaterial ➡ MeshPhysicalMaterial。
-      // 此外还有MeshDepthMaterial、MeshNormalMaterial、ShaderMaterial、RawShaderMaterial等特殊材质，此处未提供案例
       function makeInstance(anotherParams) {
-
         let material = null
         switch (anotherParams.type) {
           case 'Physical':
             material = new THREE.MeshPhysicalMaterial({
               color: anotherParams.color,
-              roughness: anotherParams.roughness, // 参数从0到1，粗糙度（roughness）高的东西，比如棒球，就不会有很强烈的反光，而不粗糙的东西，比如台球，就很有光泽。
-              metalness: anotherParams.metalness, // 金属度，参数从0到1，0代表非金属，1代表金属
-              clearcoat: anotherParams.clearcoat, // 该参数从0到1，决定了要涂抹的清漆光亮层的程度，
-              // clearCoatRoughness: anotherParams.clearCoatRoughness, // 该参数从0到1，指定光泽层的粗糙程度。
-              flatShading: anotherParams.flatShading, // 金属度，参数从0到1，0代表非金属，1代表金属
+              roughness: anotherParams.roughness,
+              metalness: anotherParams.metalness,
+              clearcoat: anotherParams.clearcoat,
+              flatShading: anotherParams.flatShading,
               // side:THREE.FrontSide, // 只显示正面
               side:THREE.DoubleSide, // 显示正反面
-            }); // MeshPhysicalMaterial材质受光照影响
+            });
             break;
           default:
             break;
@@ -73,9 +69,9 @@ export default {
         }
 
         // // 添加平行光光照
-        // const intensity = 1; // 光照强度
+        // const intensity = 1;
         // const light = new THREE.DirectionalLight(0xFFFFFF, intensity);
-        // light.position.set(0, 0, 5); //设置定光位置在相机左上方(-1, 2, 4), 默认目标点为原点(0, 0, 0)
+        // light.position.set(0, 0, 5);
         // scene.add(light);
 
         // 添加环境光
@@ -85,7 +81,6 @@ export default {
         scene.add(light2);
         
         return square
-
       }
 
       // 注意按原点来画六个面，这样在修改fatherObj.rotation.x和fatherObj.rotation.y时才会绕原点旋转
@@ -176,31 +171,21 @@ export default {
       // console.log(fatherObj)
       renderer.render(scene, camera);
 
-      // 旋转
       function render(time) {
-
         time *= 0.001;
-
-        // 响应式的使相机宽高比等于canvas画布的宽高比,解决正方体被拉伸问题
         if (resizeRendererToDisplaySize(renderer)) {
-
           const canvas = renderer.domElement;
           camera.aspect = canvas.clientWidth / canvas.clientHeight;
           camera.updateProjectionMatrix();
-
         }
-
         fatherObj.rotation.x = time;
         fatherObj.rotation.y = time;
         renderer.render(scene, camera);
         requestAnimationFrame(render);
-        
       }
       requestAnimationFrame(render);
 
-      // 判断canvas宽高变化，动态设置绘图缓冲区(drawingbuffer)尺寸，解决canvas元素设置css样式模糊问题
       function resizeRendererToDisplaySize(renderer) {
-
         const canvas = renderer.domElement;
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
@@ -209,7 +194,6 @@ export default {
           renderer.setSize(width, height, false);
         }
         return needResize;
-
       }
     }
   },

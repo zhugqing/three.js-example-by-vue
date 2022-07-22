@@ -17,7 +17,7 @@ export default {
       const canvas = document.getElementById('square');
       const renderer = new THREE.WebGLRenderer({canvas});
 
-      const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 2);
+      const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 20);
       camera.position.z = 2;
 
       const scene = new THREE.Scene();
@@ -39,8 +39,6 @@ export default {
       const heightSegments = 13;
       const geometry = new THREE.PlaneGeometry( w, h, widthSegments, heightSegments );
 
-      // 各种标准材质的构建速度从最快到最慢：MeshBasicMaterial ➡ MeshLambertMaterial ➡ MeshPhongMaterial ➡ MeshStandardMaterial ➡ MeshPhysicalMaterial。
-      // 此外还有MeshDepthMaterial、MeshNormalMaterial、ShaderMaterial、RawShaderMaterial等特殊材质，此处未提供案例
       function makeInstance(type, color, shininess, xposition, yposition, anotherParams) {
         let material = null
         switch (type) {
@@ -48,20 +46,18 @@ export default {
             material = new THREE.MeshBasicMaterial({
               color: color,
               // side:THREE.DoubleSide
-              // shininess: shininess,
-            }); // MeshPhongMaterial材质不受光照影响
+            });
             break;
           case 'Physical':
             material = new THREE.MeshPhysicalMaterial({
               color: color,
-              roughness: anotherParams.roughness, // 参数从0到1，粗糙度（roughness）高的东西，比如棒球，就不会有很强烈的反光，而不粗糙的东西，比如台球，就很有光泽。
-              metalness: anotherParams.metalness, // 金属度，参数从0到1，0代表非金属，1代表金属
-              clearcoat: anotherParams.clearcoat, // 该参数从0到1，决定了要涂抹的清漆光亮层的程度，
-              // clearCoatRoughness: anotherParams.clearCoatRoughness, // 该参数从0到1，指定光泽层的粗糙程度。
-              flatShading: anotherParams.flatShading, // 金属度，参数从0到1，0代表非金属，1代表金属
+              roughness: anotherParams.roughness,
+              metalness: anotherParams.metalness,
+              clearcoat: anotherParams.clearcoat,
+              flatShading: anotherParams.flatShading,
               // side:THREE.FrontSide
               side:THREE.DoubleSide
-            }); // MeshPhysicalMaterial材质受光照影响
+            });
             break;
         
           default:
@@ -71,10 +67,10 @@ export default {
         scene.add(square);
         square.position.x = xposition;
         square.position.y = yposition;
-        // 添加光照
-        const intensity = 1; // 光照强度
+
+        const intensity = 1;
         const light = new THREE.DirectionalLight(0xFFFFFF, intensity);
-        light.position.set(-1, 2, 5); //设置定光位置在相机左上方(-1, 2, 4), 默认目标点为原点(0, 0, 0)
+        light.position.set(-1, 2, 5);
         scene.add(light);
         return square
       }
@@ -98,11 +94,9 @@ export default {
 
       renderer.render(scene, camera);
 
-      // // 旋转
       function render(time) {
         time *= 0.001;
 
-        // 响应式的使相机宽高比等于canvas画布的宽高比,解决正方体被拉伸问题
         if (resizeRendererToDisplaySize(renderer)) {
           const canvas = renderer.domElement;
           camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -111,7 +105,7 @@ export default {
 
         Obj.forEach((item, index) => {
           let speed = 1 + index*.1;
-          // item.rotation.x = time*speed;
+          item.rotation.x = time*speed;
           item.rotation.y = time*speed;
         })
         renderer.render(scene, camera);
@@ -119,7 +113,6 @@ export default {
       }
       requestAnimationFrame(render);
 
-      // 判断canvas宽高变化，动态设置绘图缓冲区(drawingbuffer)尺寸，解决canvas元素设置css样式模糊问题
       function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
         const width = canvas.clientWidth;
