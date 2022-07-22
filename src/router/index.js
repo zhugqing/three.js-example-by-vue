@@ -6,18 +6,19 @@ const RotatingCube = () => import('../pages/002-Rotating-cube')
 const RotatingLightCube = () => import('../pages/003-Rotating-light-cube')
 const MultipleCubes= () => import('../pages/004-Multiple-cubes')
 const ResponsiveDesign= () => import('../pages/005-responsive-design')
-const SceneGraphOne = () => import('../pages/006-scene-graph-01');
-const SceneGraphTwo = () => import('../pages/007-scene-graph-02');
-const SceneGraphThree = () => import('../pages/008-scene-graph-03');
-const SceneGraphFour = () => import('../pages/009-scene-graph-04');
-const SceneGraphFive = () => import('../pages/010-scene-graph-05');
-const materialsOne = () => import('../pages/011-materials-01');
-const materialsTwo = () => import('../pages/012-materials-02');
-const materialsThree = () => import('../pages/013-materials-03');
-const materialsFour = () => import('../pages/014-materials-04');
-const materialsFive = () => import('../pages/015-materials-05');
-const materialsSix = () => import('../pages/016-materials-06');
-const textureOne = () => import('../pages/017-texture-01');
+const SceneGraphOne = () => import('../pages/006-scene-graph-01')
+const SceneGraphTwo = () => import('../pages/007-scene-graph-02')
+const SceneGraphThree = () => import('../pages/008-scene-graph-03')
+const SceneGraphFour = () => import('../pages/009-scene-graph-04')
+const SceneGraphFive = () => import('../pages/010-scene-graph-05')
+const materialsOne = () => import('../pages/011-materials-01')
+const materialsTwo = () => import('../pages/012-materials-02')
+const materialsThree = () => import('../pages/013-materials-03')
+const materialsFour = () => import('../pages/014-materials-04')
+const materialsFive = () => import('../pages/015-materials-05')
+const materialsSix = () => import('../pages/016-materials-06')
+const textureOne = () => import('../pages/017-texture-01')
+const textureTwo = () => import('../pages/018-texture-02')
 
 Vue.use(VueRouter)
 
@@ -106,6 +107,11 @@ const routes = [
     path: '/texture_one',
     name: 'texture_one',
     component: textureOne
+  },
+  {
+    path: '/texture_two',
+    name: 'texture_two',
+    component: textureTwo
   },
 ]
 
