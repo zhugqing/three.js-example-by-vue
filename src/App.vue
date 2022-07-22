@@ -17,6 +17,7 @@
       <router-link to="/materials_four">材质04-平面着色</router-link> |
       <router-link to="/materials_five">材质05-显示正反面</router-link> |
       <router-link to="/materials_six">材质06-六个面验证正反面显示</router-link> |
+      <router-link to="/texture_one">Hello Texture</router-link> |
     </nav>
     <router-view/>
   </div>
