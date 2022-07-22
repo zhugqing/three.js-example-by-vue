@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <canvas id="square"></canvas>
+    <canvas id="square" width="800" height="800"></canvas>
   </div>
 </template>
 

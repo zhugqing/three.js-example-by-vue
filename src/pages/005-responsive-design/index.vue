@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- 响应式设计防止画面模糊 -->
-    <canvas id="square"></canvas>
+    <canvas id="square" width="800" height="800"></canvas>
   </div>
 </template>
 
